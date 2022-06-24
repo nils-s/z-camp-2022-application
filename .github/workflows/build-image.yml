@@ -1,0 +1,54 @@
+name: Build and upload container image
+on: workflow_dispatch
+
+jobs:
+  buildJar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: set up java build environment
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: build with maven
+        run: mvn -B package --file pom.xml
+
+      - name: copy jar to artifacts directory
+        run: mkdir artifacts && cp target/*.jar artifacts
+
+      - name: upload jar as build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app.jar
+          path: artifacts/app.jar
+
+  buildImage:
+    needs: buildJar
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: download application jar file
+        uses: actions/download-artifact@v3
+        with:
+          name: app.jar
+
+      - name: Azure container registry log in
+        uses: docker/login-action@v2
+        with:
+          registry: alicecamp22reg.azurecr.io
+          username: ${{ secrets.ACR_IMAGE_PUSH_USER_CLIENT_ID }}
+          password: ${{ secrets.ACR_IMAGE_PUSH_USER_PASSWORD }}
+
+      - name: build docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: alicecamp22reg.azurecr.io/nils-s-camp22:latest
