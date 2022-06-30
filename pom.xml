@@ -20,7 +20,6 @@
     <properties>
         <artifact.name>app</artifact.name>
         <java.version>17</java.version>
-        <azure.eventgrid.version>4.11.2</azure.eventgrid.version>
     </properties>
 
     <dependencies>
