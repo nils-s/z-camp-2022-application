@@ -111,6 +111,10 @@ This one was pretty much an afterthought, and I didn't have time to do it during
 seems easy enough, though, so the page you're looking at was added after the camp, to provide at
 least some documentation.
 
+And because nothing ever works on the first try, here's how to fix the GitHub pages problem
+where the page cannot be deployed because there is already a deployment in progress:
+[gist](https://gist.github.com/nils-s/7d727675e554877e518c380872851c46)
+
 ### Git submodules
 
 Git's submodule feature was also only used in the most rudimentary way, to add the
