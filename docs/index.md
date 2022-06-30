@@ -1,5 +1,3 @@
----
----
 # Zühlke Camp 2022
 
 - [What's this about?](#intro)
