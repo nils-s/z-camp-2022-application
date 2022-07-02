@@ -1,7 +1,3 @@
----
-title: Zühlke Camp 2022
-description: Summary of stuff I did and things I learned in 2022's camp
----
 <img src="assets/images/panorama.jpg" alt="Panorama">
 
 # Zühlke Camp 2022
@@ -133,4 +129,4 @@ though, so that is still something I need to try out.
 
 Overall, this was one of the best camps I've been to. Very nice location, great vibe, and
 (probably a first) I managed to look at and achieve all of (or at least most of) what I had in mind
-for the Camp :smiley:
+for the Camp :tada:
