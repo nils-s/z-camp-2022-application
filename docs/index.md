@@ -1,3 +1,9 @@
+---
+title: Zühlke Camp 2022
+description: Summary of stuff I did and things I learned in 2022's camp
+---
+<img src="/assets/images/panorama.jpg" alt="Panorama">
+
 # Zühlke Camp 2022
 
 - [What's this about?](#intro)
@@ -10,7 +16,7 @@
 Zühlke Camp is a yearly 4-day workshop/hackathon/nerd-fest where you spend time with your team
 in a nice place, learning new stuff you're interested in :)
 
-The Alice team's camp in 2022 took place in mid-June, in [La Tour-de-Peilz](https://en.wikipedia.org/wiki/La_Tour-de-Peilz).
+The Alice team's camp in 2022 took place in mid-June, in [La Tour-de-Peilz :world_map:](https://www.google.com/maps/place/La+Tour-de-Peilz/@46.4502073,6.8640008,14.5z).
 
 This page gives a brief overview of topics and technologies I looked at during the Camp, and
 some info about what I learned (mainly to serve as a quick tutorial for myself, when I need to
@@ -90,7 +96,7 @@ developer perspective (with no prior AD experience), AWS feels more logical.
 
 ### Terraform
 
-Still a nice tool :) Different providers for "normal" Azure and Azure AD were a bit surprising,
+Still a nice tool :smiley: Different providers for "normal" Azure and Azure AD were a bit surprising,
 but that is only a minor technical detail, apart from that there were no surprises.
 
 ### Helm
@@ -113,7 +119,7 @@ least some documentation.
 
 And because nothing ever works on the first try, here's how to fix the GitHub pages problem
 where the page cannot be deployed because there is already a deployment in progress:
-[gist](https://gist.github.com/nils-s/7d727675e554877e518c380872851c46)
+[gist :octocat:](https://gist.github.com/nils-s/7d727675e554877e518c380872851c46)
 
 ### Git submodules
 
@@ -127,4 +133,4 @@ though, so that is still something I need to try out.
 
 Overall, this was one of the best camps I've been to. Very nice location, great vibe, and
 (probably a first) I managed to look at and achieve all of (or at least most of) what I had in mind
-for the Camp :)
+for the Camp :smiley:
