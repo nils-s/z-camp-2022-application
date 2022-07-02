@@ -2,7 +2,7 @@
 title: Zühlke Camp 2022
 description: Summary of stuff I did and things I learned in 2022's camp
 ---
-<img src="/assets/images/panorama.jpg" alt="Panorama">
+<img src="assets/images/panorama.jpg" alt="Panorama">
 
 # Zühlke Camp 2022
 
@@ -14,7 +14,7 @@ description: Summary of stuff I did and things I learned in 2022's camp
 ## What's this about? <a name="intro"></a>
 
 Zühlke Camp is a yearly 4-day workshop/hackathon/nerd-fest where you spend time with your team
-in a nice place, learning new stuff you're interested in :)
+in a nice place, learning new stuff you're interested in :smiley:
 
 The Alice team's camp in 2022 took place in mid-June, in [La Tour-de-Peilz :world_map:](https://www.google.com/maps/place/La+Tour-de-Peilz/@46.4502073,6.8640008,14.5z).
 
