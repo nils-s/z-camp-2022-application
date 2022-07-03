@@ -17,30 +17,29 @@ jobs:
       contents: read
       packages: write
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: set up java build environment
+      - name: Set up Java build environment
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: 'maven'
 
-      - name: build with maven
-        if: ${{ !inputs.publish-jar }}
+      - name: Build jar file with Maven
         run: mvn -B package --file pom.xml
 
-      - name: build with maven and upload to GitHub packages repo
+      - name: Upload artifact to GitHub packages repo
         if: ${{ inputs.publish-jar }}
         run: mvn -B deploy --file pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: copy jar to artifacts directory
+      - name: Copy jar to artifacts directory
         run: mkdir artifacts && cp target/*.jar artifacts
 
-      - name: upload jar as build artifact
+      - name: Upload jar as build artifact
         uses: actions/upload-artifact@v3
         with:
           name: app.jar
@@ -52,23 +51,23 @@ jobs:
     env:
       PUBLISH_IMAGE: ${{ inputs.publish-image && (secrets.ACR_IMAGE_PUSH_USER_CLIENT_ID != '') && (secrets.ACR_IMAGE_PUSH_USER_PASSWORD != '') }}
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: download application jar file
+      - name: Download application jar file
         uses: actions/download-artifact@v3
         with:
           name: app.jar
 
       - name: Azure container registry log in
-        if: ${{ env.PUBLISH_IMAGE }}
+        if: ${{ env.PUBLISH_IMAGE == 'true' }}
         uses: docker/login-action@v2
         with:
           registry: alicecamp22reg.azurecr.io
           username: ${{ secrets.ACR_IMAGE_PUSH_USER_CLIENT_ID }}
           password: ${{ secrets.ACR_IMAGE_PUSH_USER_PASSWORD }}
 
-      - name: build docker image
+      - name: Build container image (and upload it, if necessary)
         uses: docker/build-push-action@v3
         with:
           context: .
