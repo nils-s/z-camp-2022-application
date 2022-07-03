@@ -6,9 +6,9 @@ on:
       publish-jar:
         type: boolean
         description: Publish jar file to GitHub Packages Maven repository
-      build-image:
+      publish-image:
         type: boolean
-        description: Build container image and upload it to container registry
+        description: Publish container image to container registry
 
 jobs:
   buildJar:
@@ -47,9 +47,10 @@ jobs:
           path: artifacts/app.jar
 
   buildImage:
-    if: ${{ inputs.build-image && (secrets.ACR_IMAGE_PUSH_USER_CLIENT_ID != '') && (secrets.ACR_IMAGE_PUSH_USER_PASSWORD != '') }}
     needs: buildJar
     runs-on: ubuntu-latest
+    env:
+      PUBLISH_IMAGE: ${{ inputs.publish-image && (secrets.ACR_IMAGE_PUSH_USER_CLIENT_ID != '') && (secrets.ACR_IMAGE_PUSH_USER_PASSWORD != '') }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -60,6 +61,7 @@ jobs:
           name: app.jar
 
       - name: Azure container registry log in
+        if: ${{ env.PUBLISH_IMAGE }}
         uses: docker/login-action@v2
         with:
           registry: alicecamp22reg.azurecr.io
@@ -70,5 +72,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          push: true
+          push: ${{ env.PUBLISH_IMAGE }}
           tags: alicecamp22reg.azurecr.io/nils-s-camp22:latest
