@@ -1,9 +1,21 @@
 name: Build and upload container image
-on: workflow_dispatch
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish-jar:
+        type: boolean
+        description: Publish jar file to GitHub Packages Maven repository
+      build-image:
+        type: boolean
+        description: Build container image and upload it to container registry
 
 jobs:
   buildJar:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -16,7 +28,14 @@ jobs:
           cache: 'maven'
 
       - name: build with maven
+        if: ${{ !inputs.publish-jar }}
         run: mvn -B package --file pom.xml
+
+      - name: build with maven and upload to GitHub packages repo
+        if: ${{ inputs.publish-jar }}
+        run: mvn -B deploy --file pom.xml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: copy jar to artifacts directory
         run: mkdir artifacts && cp target/*.jar artifacts
@@ -28,6 +47,7 @@ jobs:
           path: artifacts/app.jar
 
   buildImage:
+    if: ${{ inputs.build-image && (secrets.ACR_IMAGE_PUSH_USER_CLIENT_ID != '') && (secrets.ACR_IMAGE_PUSH_USER_PASSWORD != '') }}
     needs: buildJar
     runs-on: ubuntu-latest
     steps:
