@@ -1,0 +1,51 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.238.0/containers/jekyll
+{
+	"name": "Jekyll",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			// Update 'VARIANT' to pick a Debian OS version: bullseye, buster
+			// Use bullseye when on local arm64/Apple Silicon.
+			"VARIANT": "bullseye",
+			// Enable Node.js: pick the latest LTS version
+			"NODE_VERSION": "lts/*"
+		}	
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [
+		// Jekyll server
+		4000,
+		// Live reload server
+		35729
+	],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "sh .devcontainer/post-create.sh",
+
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode",
+
+	//------------------
+	//
+	// manually-added additional config to use dev container on Fedora Linux with root-less Podman:
+	//
+	//  - containerEnv block:
+	//     HOME -> set up home directory so that it can be created; default location (/root) doesn't work
+	//  - runArgs block:
+	//     userns=keep-id -> make podman use UID/GID of the host system's logged-in user
+	//     security-opt=label=disable -> prevent SELinux errors (SELinux would otherwise prevent access to certain files)
+	//
+	//------------------
+
+	"containerEnv": {
+		"HOME": "/home/vscode"
+	},
+	
+	"runArgs": [ 
+		"--userns=keep-id",
+		"--security-opt=label=disable" 
+	]
+
+}
