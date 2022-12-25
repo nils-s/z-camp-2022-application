@@ -1,4 +1,4 @@
-# basic dependabot config to keep Java libs and GitHub actions up-to-date
+# basic dependabot config to keep Java libs, GitHub actions, and Docker image up-to-date
 
 version: 2
 updates:
@@ -12,7 +12,6 @@ updates:
     assignees:
       - "nils-s"
     commit-message:
-      prefix: "[Dependabot]"
       include: scope
     open-pull-requests-limit: 1
 
@@ -25,6 +24,17 @@ updates:
     assignees:
       - "nils-s"
     commit-message:
-      prefix: "[Dependabot]"
+      include: scope
+    open-pull-requests-limit: 1
+
+  # auto-update Docker base image
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+    assignees:
+      - "nils-s"
+    commit-message:
       include: scope
     open-pull-requests-limit: 1
