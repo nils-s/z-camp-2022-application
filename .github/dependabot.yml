@@ -12,6 +12,7 @@ updates:
     assignees:
       - "nils-s"
     commit-message:
+      prefix: chore
       include: scope
     open-pull-requests-limit: 1
 
@@ -24,6 +25,7 @@ updates:
     assignees:
       - "nils-s"
     commit-message:
+      prefix: chore
       include: scope
     open-pull-requests-limit: 1
 
@@ -36,5 +38,6 @@ updates:
     assignees:
       - "nils-s"
     commit-message:
+      prefix: chore
       include: scope
     open-pull-requests-limit: 1
