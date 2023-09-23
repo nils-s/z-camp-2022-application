@@ -18,7 +18,7 @@ jobs:
       packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Java build environment
         uses: actions/setup-java@v3
@@ -52,7 +52,7 @@ jobs:
       PUBLISH_IMAGE: ${{ inputs.publish-image && (secrets.ACR_IMAGE_PUSH_USER_CLIENT_ID != '') && (secrets.ACR_IMAGE_PUSH_USER_PASSWORD != '') }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download application jar file
         uses: actions/download-artifact@v3
