@@ -1,4 +1,4 @@
-FROM eclipse-temurin:19.0.2_7-jre-alpine
+FROM eclipse-temurin:20.0.2_9-jre-alpine
 
 # addgroup / adduser options:
 # -S - create system group / user
